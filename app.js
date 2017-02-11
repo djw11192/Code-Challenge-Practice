@@ -94,3 +94,47 @@ function number2words(n){
       return number2words(Math.floor(n/1000))+' thousand'+(n%1000===0?'':' '+number2words(n%1000));
     }
   }
+
+
+///Generate hashtag challenge:
+
+
+function generateHashtag(str) {
+  var marketing = ["#"];
+  var words = str.split(" ");
+  words.forEach(function(word){
+    var capitalizedWord = word[0].toUpperCase() + word.slice(1,word.length);
+    console.log(capitalizedWord);
+    marketing.push(capitalizedWord);
+  })
+  var result = marketing.join("");
+  return result;
+}
+
+
+OR
+
+
+function generateHashtag(str) {
+  var hashed = '#' + str.split(' ').map(function(v) {return v.charAt(0).toUpperCase() + v.slice(1);}).join('');
+  return hashed.length > 140 || str == "" ? false : hashed;
+}
+
+
+///////Predicting christmas presents - Comparing objects
+
+function guessGifts(wishlist, presents) {
+  // TODO
+  var gifts = [];
+  for(var i=0; i<presents.length; i++){
+    var present = presents[i];
+    for(var j=0; j<wishlist.length; j++){
+      if(present.size == wishlist[j].size && present.clatters == wishlist[j].clatters && present.weight == wishlist[j].weight){
+        if(gifts.indexOf(wishlist[j].name) ==-1){
+          gifts.push(wishlist[j].name);
+        }
+      }
+    }
+  }
+  return gifts;
+}
