@@ -138,3 +138,98 @@ function guessGifts(wishlist, presents) {
   }
   return gifts;
 }
+
+
+
+/////Find all prime numes 0 - n////////////
+
+function prime(num) {
+  // Generate an array containing every prime number between 0 and the num specified (inclusive)
+  var primes =[];
+  for(var j=2; j<num+1; j++){
+    if(isPrime(j)){
+      primes.push(j);
+    }
+  }
+  function isPrime(n){
+    for(var i= 2; i<n; i++){
+      if(n%i == 0){
+        return false;
+      }
+    }
+    return true;
+  }
+  return primes;
+}
+
+
+
+
+//////Palindrome step counter////////////
+
+
+var palindromeChainLength = function(n) {
+  var steps = 0;
+  while(!isPalindromic(n)) {
+    steps++;
+    n+=reverseNum(n);
+  }
+  return steps;
+};
+
+function isPalindromic(n) {
+  if (n < 0) throw 'isPalindromic only works for positive numbers.';
+  if (Math.floor(n / 10) === 0) return true; // Single digit numbers are palindromic.
+  if (n % 10 === 0) return false; // n > 0, without leading 0s cannot be palindromic if ending in 0.
+  return reverseNum(n) === n;
+}
+
+function reverseNum(n) {
+  var r = 0;
+  while (n) {
+    r *= 10;
+    r += n % 10;
+    n = Math.floor(n / 10);
+  }
+  return r;
+}
+
+///Translate Gandolf: Replace each vowel with the vowel that comes 3 before it.  Replace other letters with the letter 10 places before
+
+function tongues(code) {
+  var indexToUpcase = false;
+  var result = [];
+  var vowels = ["a", "i", "y", "e", "o", "u"];
+  var others = ['b', 'k', 'x', 'z', 'n', 'h', 'd', 'c', 'w', 'g', 'p', 'v', 'j', 'q', 't', 's', 'r', 'l', 'm', 'f'];
+  var sentence = code.split("");
+  for(var i=0; i<sentence.length; i++){
+    if(sentence[i] === sentence[i].toUpperCase()){
+      indexToUpcase = true;
+      console.log(indexToUpcase)
+    }
+    var check = sentence[i].toLowerCase();
+    for(var j=0; j<others.length; j++){
+      if(check === others[j]){
+        var newIndex = j-10;
+        if(newIndex<0){
+          newIndex += others.length;
+        }
+        sentence[i]= others[newIndex]
+      }
+    }
+    for(var y=0; y<vowels.length; y++){
+      if(check===vowels[y]){
+        var newIndex = y-3;
+        if(newIndex<0){
+          newIndex += vowels.length;
+        }
+        sentence[i] = vowels[newIndex];
+      }
+    }
+    if(indexToUpcase){
+      sentence[i] = sentence[i].toUpperCase();
+      indexToUpcase = false;
+    }
+  }
+  return sentence.join("");
+}
